@@ -1,1 +1,38 @@
-hello
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wikinota</title>
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+</head>
+
+<body>
+
+  <div id="ModulFunctions">
+    <div v-show="CheckModalvar() == true"  style="display:none;" class="modal-mask">
+      <div v-if="modalvar == 'HashSave'">
+        <div class="modal" id="AppLogin">
+          <input type="password" @keyup.enter="HashSave(message)" v-model="message" placeholder="insert password" /><br>
+          <button v-on:click="HashSave(message)">Login</button>
+
+          <p>Hash: {{ AdminHash }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="desk">
+    DESK
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jshashes/1.0.7/hashes.min.js" integrity="sha256-H7hBuovONQQrY3zESq6MXx+b5Q3ovOY03taLJUaMauk=" crossorigin="anonymous"></script>
+
+  <script src="js/vue.min.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
