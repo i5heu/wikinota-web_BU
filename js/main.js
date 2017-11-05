@@ -51,7 +51,6 @@ var desk = new Vue({
   created: function () {
     console.log("test");
 
-
   // POST /someUrl
   this.$http.post('http://localhost:8080/api', {foo: 'bar'}).then(response => {
 

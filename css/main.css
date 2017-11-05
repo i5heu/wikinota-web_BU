@@ -1,3 +1,43 @@
+/*! minireset.css v0.0.3 | MIT License | github.com/jgthms/minireset.css*/
+html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,iframe,hr,h1,h2,h3,h4,h5,h6{margin:0;padding:0}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}ul{list-style:none}
+button,input,select,textarea{margin:0}html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+img,embed,iframe,object,audio,video{height:auto;max-width:100%}iframe{border:0}table{border-collapse:collapse;border-spacing:0}td,th{padding:0;text-align:left}
+
+
+header {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  background: #014663;
+}
+
+.headerelement{
+  background: #00748a;
+  color: #fff;
+  height: 2em;
+  border:0;
+  padding:0;
+  margin:0;
+  font-size: 1em;
+  padding-left:10px;
+  padding-right:10px;
+  outline: none;
+}
+#searchinput{
+  margin:0;
+  padding:0;
+  background: #004556;
+  color:#fff;
+}
+
+#searchbutton{
+  border:0;
+  background: #008fab;
+  color:#fff;
+}
+
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -19,4 +59,28 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+#spacer{
+  height:35px;
+  width: 100%;
+  display: block;
+
+}
+
+
+
+
+
+
+
+/*################ CONTENT #######################*/
+
+#content{
+  display: block;
+  height: 100%;
+  width:100%;
+  max-width: 600px;
+  margin:0 auto 0 auto;
+  padding:3px;
 }
