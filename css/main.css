@@ -4,14 +4,34 @@ h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}ul{list-style:none}
 button,input,select,textarea{margin:0}html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
 img,embed,iframe,object,audio,video{height:auto;max-width:100%}iframe{border:0}table{border-collapse:collapse;border-spacing:0}td,th{padding:0;text-align:left}
 
+body{
+  background: #f7f7f7;
+}
 
 header {
   position: fixed;
   top:0;
   left:0;
   width: 100%;
-  background: #014663;
 }
+
+#headerbar{
+  background: #014663;
+  z-index: 1000;
+}
+
+#menue{
+  position: fixed;
+  right: 0;
+  float: right;
+  padding:5px 10px 5px 10px;
+  min-width: 100px;
+  background: #000;
+  color: #fff;
+  height: 100%;
+  z-index: 1000;
+}
+
 
 .headerelement{
   background: #00748a;
@@ -37,6 +57,11 @@ header {
   background: #008fab;
   color:#fff;
 }
+
+#menuebutton{
+  float: right;
+}
+
 
 .modal-mask {
   position: fixed;
@@ -69,7 +94,16 @@ header {
 }
 
 
+/*###################### MENUE ######################*/
 
+#wn-menue{
+  float: right;
+  background: black;
+  color: #fff;
+  min-height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 
 
@@ -82,5 +116,25 @@ header {
   width:100%;
   max-width: 600px;
   margin:0 auto 0 auto;
-  padding:3px;
+  padding:10px;
+  background: #fff;
+}
+
+
+
+
+/*############# GLOBAL CALLSES ###################*/
+
+
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
