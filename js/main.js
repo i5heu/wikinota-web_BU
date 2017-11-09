@@ -5,35 +5,111 @@ Vue.config.devtools = true
 Vue.use(VueRouter)
 
 
-const GetPageByURL = {
-  name: "GetPageByURL",
+const GetDesktop = {
+  name: "GetDesktop",
   data: function() {
     return {
-    PC:"HAAAXXX"
-  }},
-  props:{
-    title1 :{
-      type:String,
-      default: "main"
-    },
-    title2 :{
-      type:String,
-      default: "main"
+      DATA: "ERROR"
     }
   },
   template: `
   <div>
-    <span class="namespace">{{ PC.Ttitle1 }}</span>
-    <h1>{{ PC.Ttitle1 }}</h1>
-
-    <div>{{ PC.Text1 }}</div>
+  DESK<br>
+    <GetDesktopPageTimeCreate :ajson="DATA"></GetDesktopPageTimeCreate>
   </div>
   `,
   methods: {
     GetPage: function() {
       // POST /someUrl
       this.$http.post(ApiUrl, {
-        PWD: AdminHash ,
+        PWD: AdminHash,
+        Method: "ItemListRead",
+        SearchAPP: "page"
+      }).then(response => {
+        // get status
+        response.status;
+
+        console.log("API-", response.status, "->", AdminHash);
+
+        // get status text
+        response.statusText;
+
+        // get 'Expires' header
+        response.headers.get('Expires');
+
+        // get body data
+        this.tmpjson = JSON.parse(JSON.stringify(response.body));
+
+        this.DATA = this.tmpjson.DATA
+
+        console.log(this.DATA);
+        return this.DATA
+
+
+
+
+      }, response => {
+        // error callback
+        console.log("API-ERROR");
+      });
+    }
+  },
+  beforeMount() {
+    console.log("HAHAHAHAHH");
+   this.GetPage()
+  }
+};
+
+const GetPageByURL = {
+  name: "GetPageByURL",
+  data: function() {
+    return {
+      PC: "HAAAXXX"
+    }
+  },
+  props: {
+    title1: {
+      type: String,
+      default: "main"
+    },
+    title2: {
+      type: String,
+      default: "main"
+    }
+  },
+  template: `
+  <div id="content">
+    <span class="namespace">{{ PC.Title1 }}</span>
+    <h1>{{ PC.Title2 }}</h1>
+    <table class="time">
+      <tr>
+        <td>createt </td>
+        <td>{{ PC.Timecreate }}</td>
+      </tr>
+      <tr>
+        <td>lastedit </td>
+        <td>{{ PC.Timelastedit }}</td>
+      </tr>
+    </table>
+    <div class="Text" v-html="PC.Text1"></div>
+    <hr>
+    <div>
+      Notizen:<br>
+      <div class="Text">{{ PC.Text2 }}</div>
+    </div>
+    <hr>
+    Tags:<br>
+    {{PC.Tags1}}
+
+
+
+</div>
+  `,
+  methods: {
+    GetPage: function() {
+      // POST /someUrl
+      this.$http.post(ApiUrl, {
+        PWD: AdminHash,
         Method: "ItemIdRead",
         APP: "page",
         Title1: this.title1,
@@ -43,7 +119,7 @@ const GetPageByURL = {
         // get status
         response.status;
 
-        console.log("API-",response.status, "->" , AdminHash);
+        console.log("API-", response.status, "->", AdminHash);
 
         // get status text
         response.statusText;
@@ -55,6 +131,7 @@ const GetPageByURL = {
         this.json = JSON.parse(JSON.stringify(response.body));
 
         this.PC = this.json.DATA[0]
+        this.PC.Text1 = marked(this.PC.Text1, { sanitize: true })
 
         console.log(this.PC.Title1);
         return this.PC
@@ -130,15 +207,17 @@ Vue.component("wn-menue", {
 const router = new VueRouter({
   routes: [
     // dynamische Segmente beginnen mit Doppelpunkt
-      {
+    {
       path: '/',
-       component: GetPageByURL,
-     },
-     {
-     path: '/p/:title1/:title2',
+      name: "home",
+      component: GetDesktop,
+    },
+    {
+      path: '/p/:title1/:title2',
+      name: "page",
       component: GetPageByURL,
       props: true
-     }
+    }
   ]
 })
 
@@ -146,13 +225,14 @@ const router = new VueRouter({
 var app = new Vue({
   el: "#root",
   router: router,
-  components: { login: 'wn-login' },
+  components: {
+    login: 'wn-login'
+  },
   data: {
     menue: false,
     PageContent: ""
   },
   methods: {},
-  beforeMount() {
-  }
+  beforeMount() {}
 
 })
