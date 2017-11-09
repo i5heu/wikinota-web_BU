@@ -14,10 +14,10 @@ const GetDesktop = {
     }
   },
   template: `
-  <div>
-  DESK<br>
+  <div class="desk">
     <div v-if="loading == false">
-      <GetDesktopPageTimeCreate :ajson="DATA"></GetDesktopPageTimeCreate>
+      <GetDesktopPageTimeCreate :ajson="DATA.Pages"></GetDesktopPageTimeCreate>
+      <DeskGeldlog :ajson="DATA"></DeskGeldlog>
     </div>
     <div v-else>
       <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
@@ -30,8 +30,7 @@ const GetDesktop = {
       // POST /someUrl
       this.$http.post(ApiUrl, {
         PWD: AdminHash,
-        Method: "ItemListRead",
-        SearchAPP: "page"
+        Method: "Desk",
       }).then(response => {
         // get status
         response.status;
@@ -47,10 +46,8 @@ const GetDesktop = {
         // get body data
         this.tmpjson = JSON.parse(JSON.stringify(response.body));
 
-        this.DATA = this.tmpjson.DATA
-
+        this.DATA = this.tmpjson
         console.log(this.DATA);
-
         this.loading = false
         return this.DATA
 
@@ -234,6 +231,11 @@ const router = new VueRouter({
       name: "page",
       component: GetPageByURL,
       props: true
+    },
+    {
+      path: '/geldlog',
+      name: "geldlog",
+      component: Geldlog
     }
   ]
 })
