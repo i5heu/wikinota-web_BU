@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Wikinota</title>
   <link rel="stylesheet" href="/static/css/main.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css">
 
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
@@ -15,8 +16,8 @@
     <header id="header">
       <wn-search>
         <div id="headerbar">
-          <button class="headerelement" id="homebutton"><router-link name="home" to="/">🏠</router-link></button>
-          <input type="text" class="headerelement" id="searchinput"></input><button class="headerelement" id="searchbutton">🔍</button>
+          <button class="headerelement" id="homebutton"><router-link name="home" id="HeaderHome" to="/"><i class="fa fa-home" aria-hidden="true"></i></router-link></button>
+          <input type="text" class="headerelement" id="searchinput"></input><button class="headerelement" id="searchbutton"><i class="fa fa-search" aria-hidden="true"></i></button>
           <button class="headerelement" v-on:click="menue = !menue" id="menuebutton">☰</button>
         </div>
       </wn-search>

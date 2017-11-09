@@ -9,13 +9,20 @@ const GetDesktop = {
   name: "GetDesktop",
   data: function() {
     return {
-      DATA: "ERROR"
+      DATA: "ERROR",
+      loading: true
     }
   },
   template: `
   <div>
   DESK<br>
-    <GetDesktopPageTimeCreate :ajson="DATA"></GetDesktopPageTimeCreate>
+    <div v-if="loading == false">
+      <GetDesktopPageTimeCreate :ajson="DATA"></GetDesktopPageTimeCreate>
+    </div>
+    <div v-else>
+      <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
   `,
   methods: {
@@ -43,6 +50,8 @@ const GetDesktop = {
         this.DATA = this.tmpjson.DATA
 
         console.log(this.DATA);
+
+        this.loading = false
         return this.DATA
 
 
@@ -56,7 +65,7 @@ const GetDesktop = {
   },
   beforeMount() {
     console.log("HAHAHAHAHH");
-   this.GetPage()
+    this.GetPage()
   }
 };
 
@@ -64,7 +73,8 @@ const GetPageByURL = {
   name: "GetPageByURL",
   data: function() {
     return {
-      PC: "HAAAXXX"
+      PC: "HAAAXXX",
+      loading: true
     }
   },
   props: {
@@ -79,6 +89,10 @@ const GetPageByURL = {
   },
   template: `
   <div id="content">
+    <div v-if="loading == true">
+      <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+      <span class="sr-only">Loading...</span>
+    </div>
     <span class="namespace">{{ PC.Title1 }}</span>
     <h1>{{ PC.Title2 }}</h1>
     <table class="time">
@@ -131,9 +145,12 @@ const GetPageByURL = {
         this.json = JSON.parse(JSON.stringify(response.body));
 
         this.PC = this.json.DATA[0]
-        this.PC.Text1 = marked(this.PC.Text1, { sanitize: true })
+        this.PC.Text1 = marked(this.PC.Text1, {
+          sanitize: true
+        })
 
         console.log(this.PC.Title1);
+        this.loading = false
         return this.PC
 
 

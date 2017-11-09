@@ -81,6 +81,11 @@ header {
   padding-right:10px;
   outline: none;
 }
+#HeaderHome {
+    text-decoration: none!important;
+    color: #fff;
+}
+
 #searchinput{
   margin:0;
   padding:0;
