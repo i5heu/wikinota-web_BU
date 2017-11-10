@@ -5,6 +5,24 @@ Vue.config.devtools = true
 Vue.use(VueRouter)
 
 
+function CurentTimestamp(){
+  var d = new Date();
+  var n = d.toISOString();
+  return n
+}
+
+
+
+var filter = function(text, length, clamp){
+    clamp = clamp || '...';
+    var node = document.createElement('div');
+    node.innerHTML = text;
+    var content = node.textContent;
+    return content.length > length ? content.slice(0, length) + clamp : content;
+};
+
+Vue.filter('truncate', filter);
+
 const GetDesktop = {
   name: "GetDesktop",
   data: function() {
@@ -14,8 +32,8 @@ const GetDesktop = {
     }
   },
   template: `
-  <div class="desk">
-    <div v-if="loading == false">
+  <div>
+    <div v-if="loading == false" class="desk">
       <GetDesktopPageTimeCreate :ajson="DATA.Pages"></GetDesktopPageTimeCreate>
       <DeskGeldlog :ajson="DATA"></DeskGeldlog>
     </div>
@@ -90,29 +108,32 @@ const GetPageByURL = {
       <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
       <span class="sr-only">Loading...</span>
     </div>
-    <span class="namespace">{{ PC.Title1 }}</span>
-    <h1>{{ PC.Title2 }}</h1>
-    <table class="time">
-      <tr>
-        <td>createt </td>
-        <td>{{ PC.Timecreate }}</td>
-      </tr>
-      <tr>
-        <td>lastedit </td>
-        <td>{{ PC.Timelastedit }}</td>
-      </tr>
-    </table>
-    <div class="Text" v-html="PC.Text1"></div>
-    <hr>
-    <div>
-      Notizen:<br>
-      <div class="Text">{{ PC.Text2 }}</div>
+    <div v-else>
+      <span class="namespace">{{ PC.Title1 }}</span><router-link class="EditButton" :to="{ name: 'pedit', params: { title1: PC.Title1, title2: PC.Title2 }}"><i class="fa fa-pencil" aria-hidden="true"></i></router-link>
+      <h1>{{ PC.Title2 }}</h1>
+      <table class="time">
+        <tr>
+          <td>createt </td>
+          <td>{{ PC.Timecreate }}</td>
+        </tr>
+        <tr>
+          <td>lastedit </td>
+          <td>{{ PC.Timelastedit }}</td>
+        </tr>
+        Public: {{PC.Public}}<br>
+
+      </table>
+      <div class="Text" v-html="PC.Text1"></div>
+      <hr>
+      <div>
+        Notizen:<br>
+        <div class="Text">{{ PC.Text2 }}</div>
+      </div>
+      <hr>
+      Tags:<br>
+      {{PC.Tags1}}
+
     </div>
-    <hr>
-    Tags:<br>
-    {{PC.Tags1}}
-
-
 
 </div>
   `,
@@ -231,6 +252,18 @@ const router = new VueRouter({
       name: "page",
       component: GetPageByURL,
       props: true
+    },
+    {
+      path: '/p/:title1/:title2/edit',
+      name: "pedit",
+      component: pEdit,
+      props: true
+    },
+    {
+      path: '/newp',
+      name: "NewPage",
+      component: pEdit,
+      props: { new: true }
     },
     {
       path: '/geldlog',

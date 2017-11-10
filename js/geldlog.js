@@ -7,7 +7,8 @@ const Geldlog = {
       loading: true,
       Title1: "main",
       Title2: "main",
-      Num1: 1
+      Num1: 1,
+      Sending: false,
     }
   },
   template: `
@@ -16,7 +17,7 @@ const Geldlog = {
       title1<input v-model="Title1"></input><br>
       title2<input v-model="Title2"></input><br>
       num1<input type="number" v-model.number="Num1"></input><br>
-      <button v-on:click="SendGeldlog" v-on:click="GetPage" >SEND</button>
+      <button v-on:click="SendGeldlog" v-on:click="GetPage" :disabled="Sending">SEND <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
       {{Status}}
     </div>
     <div v-if="loading == false">
@@ -61,11 +62,13 @@ const Geldlog = {
       });
     },
     SendGeldlog: function() {
+      this.Sending = true
       // POST /someUrl
       this.$http.post(ApiUrl, {
         PWD: AdminHash,
         Method: "ItemWrite",
         APP: "geldlog",
+        Timecreate: CurentTimestamp(),
         Title1: this.Title1,
         Title2: this.Title2,
         Num1: this.Num1,
@@ -85,6 +88,7 @@ const Geldlog = {
         // get body data
         this.Status = JSON.parse(JSON.stringify(response.body)).Status;
 
+        this.Sending = false
 
       }, response => {
         // error callback

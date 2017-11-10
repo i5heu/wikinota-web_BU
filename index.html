@@ -26,9 +26,9 @@
     <wn-menue id="menue" inline-template>
       <transition name="slide-fade">
         <div id="wn-menue" v-if="menue">
-          <ul>
-            <li>eins</li>
-            <li>zwei</li>
+          <ul class="menueSidebarTable" v-on:click="menue = false">
+            <li><router-link class="noDecoration LinkButton" :to="{ name: 'geldlog'}">Geldlog</router-link></li>
+            <li><router-link class="noDecoration LinkButton" :to="{ name: 'NewPage'}">New Page</router-link></li>
           </ul>
         </div>
       </transition>
@@ -66,6 +66,7 @@
         console.log("Spacer set to -> ", h);
       }
     });
+
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jshashes/1.0.7/hashes.min.js" integrity="sha256-H7hBuovONQQrY3zESq6MXx+b5Q3ovOY03taLJUaMauk=" crossorigin="anonymous"></script>
@@ -73,9 +74,11 @@
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-focus@2.1.0/dist/vue-focus.common.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@0.3.6/lib/marked.min.js"></script>
   <script src="/static/js/desk.js"></script>
   <script src="/static/js/geldlog.js"></script>
+  <script src="/static/js/pedit.js"></script>
   <script src="/static/js/main.js"></script>
 
 </body>

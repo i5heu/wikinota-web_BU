@@ -31,13 +31,81 @@ h1{
   border-radius: 5px;
   padding-left: 3px;
   padding-right: 3px;
+  min-width: 30px;
+  min-height: 1em;
 }
 
 .time{
   font-size: 0.8em;
 }
 
+.noDecoration, .noDecoration a{
+  text-decoration: none;
+  color: inherit;
+}
 
+.LinkButton{
+  font-size: 110%;
+  padding: 5px;
+  margin:10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.EditButton{
+  float: right;
+  font-size: 110%;
+  padding: 5px;
+  background: black;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+table{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+tr,td{
+  padding: 2px;
+}
+
+tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+
+.warn{
+  background: #ff4040;
+  color: black;
+  padding:3px;
+  margin:2px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+textarea{
+  width: 100%;
+  min-height: 100px;
+}
+
+.tags{
+  width: 100%;
+}
+
+button{
+  font-size: 105%;
+  background-color: #014663;
+  color: #fff;
+  border:0;
+  border-radius: 3px;
+  margin:5px;
+}
+
+button:disabled,
+button[disabled]{
+  background-color: #7cc4e2;
+}
 
 /*############### STRUCTURE ################*/
 body{
@@ -60,7 +128,7 @@ header {
   position: fixed;
   right: 0;
   float: right;
-  padding:5px 10px 5px 10px;
+  padding:20px 10px 5px 10px;
   min-width: 100px;
   background: #000;
   color: #fff;
@@ -103,6 +171,9 @@ header {
   float: right;
 }
 
+.menueSidebarTable li{
+    padding-bottom: 20px;
+}
 
 .modal-mask {
   position: fixed;
@@ -166,11 +237,17 @@ header {
 /*###################### DESK ######################*/
 .desk{
   display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
   width: 100%;
   height:  100%;
 }
 
 .tile{
+  min-height: 300px;
+  max-height: 300px;
+  max-width: 100%;
+  overflow: auto;
   border:1px solid black;
   padding: 5px;
 }
@@ -201,4 +278,8 @@ header {
   border-radius: 5px;
   font-size: 110%;
   margin:2px;
+}
+
+.edit{
+  border-left:1px solid #ff0000;
 }
