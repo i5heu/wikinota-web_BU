@@ -4,6 +4,10 @@ var AdminHash = localStorage.AdminHash
 Vue.config.devtools = true
 Vue.use(VueRouter)
 
+Vue.prototype.$eventHub = new Vue(); // Global event bus
+
+var db = new PouchDB('wikinota_db');
+
 
 function CurentTimestamp(){
   var d = new Date();
@@ -65,6 +69,11 @@ const GetDesktop = {
         this.tmpjson = JSON.parse(JSON.stringify(response.body));
 
         this.DATA = this.tmpjson
+
+        for(DATAkey in this.DATA.Geldlog){
+          this.DATA.Geldlog[DATAkey].Timecreate = moment(this.DATA.Geldlog[DATAkey].Timecreate).format("hh:mm DD.MM.YY");
+        }
+
         console.log(this.DATA);
         this.loading = false
         return this.DATA

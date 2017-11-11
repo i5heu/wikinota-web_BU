@@ -148,7 +148,9 @@ header {
   padding-left:10px;
   padding-right:10px;
   outline: none;
+  border-radius: 0;
 }
+
 #HeaderHome {
     text-decoration: none!important;
     color: #fff;
@@ -170,6 +172,8 @@ header {
 #menuebutton{
   float: right;
 }
+
+
 
 .menueSidebarTable li{
     padding-bottom: 20px;
@@ -253,6 +257,19 @@ header {
 }
 
 
+
+
+
+/*################ OffSync ################*/
+#OffSync{
+  display:inline-block;
+  font-size: 25px;
+  line-height: 30px;
+  height: 32px;
+  float: right;
+  color: #fff;
+  vertical-align: middle;
+}
 
 
 /*############# GLOBAL CALLSES ###################*/

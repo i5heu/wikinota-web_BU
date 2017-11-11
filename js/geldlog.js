@@ -30,6 +30,9 @@ const Geldlog = {
   </div>
   `,
   methods: {
+    update: function() {
+      this.GetPage()
+    },
     GetPage: function() {
       this.loading = true
       // POST /someUrl
@@ -52,7 +55,13 @@ const Geldlog = {
         this.tmpjson = JSON.parse(JSON.stringify(response.body));
 
         this.DATA = this.tmpjson
-        console.log(this.DATA);
+
+        for(DATAkey in this.DATA.Geldlog){
+          this.DATA.Geldlog[DATAkey].Timecreate = moment(this.DATA.Geldlog[DATAkey].Timecreate).format("hh:mm DD.MM.YY");
+        }
+
+
+        console.log("Geldlog -- >",this.DATA);
         this.loading = false
         return this.DATA
 
@@ -64,7 +73,7 @@ const Geldlog = {
     SendGeldlog: function() {
       this.Sending = true
       // POST /someUrl
-      this.$http.post(ApiUrl, {
+      AddToSyncQueue({
         PWD: AdminHash,
         Method: "ItemWrite",
         APP: "geldlog",
@@ -73,27 +82,9 @@ const Geldlog = {
         Title2: this.Title2,
         Num1: this.Num1,
         needlogin: true
-      }).then(response => {
-        // get status
-        response.status;
+      })
 
-        console.log("API-", response.status, "->", AdminHash);
-
-        // get status text
-        response.statusText;
-
-        // get 'Expires' header
-        response.headers.get('Expires');
-
-        // get body data
-        this.Status = JSON.parse(JSON.stringify(response.body)).Status;
-
-        this.Sending = false
-
-      }, response => {
-        // error callback
-        console.log("API-ERROR");
-      });
+      this.Sending = false
     }
   },
   beforeMount() {

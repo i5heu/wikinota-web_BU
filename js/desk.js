@@ -38,11 +38,16 @@ var DeskGeldlog = Vue.component("DeskGeldlog", {
   </table>
   <hr>
     <table>
+        <tr>
+          <th>Title</th>
+          <th>Namespace</th>
+          <th>Amount</th>
+          <th>Time</th>
+        </tr>
         <tr v-for="item in ajson.Geldlog">
           <td>{{ item.Title1 }}</td>
           <td><span class="namespace">{{ item.Title2 }}</span></td>
           <td>{{ item.Num1.Float64}}</td>
-          <td>{{ item.Num2.Float64}}</td>
           <td>{{ item.Timecreate}}</td>
         </tr>
     </table>
