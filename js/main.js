@@ -132,11 +132,11 @@ const GetPageByURL = {
         Public: {{PC.Public}}<br>
 
       </table>
-      <div class="Text" v-html="PC.Text1"></div>
+      <div class="GoodReadCSS" v-html="PC.Text1"></div>
       <hr>
       <div>
         Notizen:<br>
-        <div class="Text">{{ PC.Text2 }}</div>
+        <div class="GoodReadCSS">{{ PC.Text2 }}</div>
       </div>
       <hr>
       Tags:<br>
